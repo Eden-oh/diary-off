@@ -1242,6 +1242,14 @@
         return;
       }
 
+      // 이미 무료 제공 용량(50MB) 이상을 사용 중인 상태에서 새 기록을 작성하거나 사진을 추가할 때만 차단
+      const hasNewFiles = photoFiles.some(f => f !== null);
+      if (!isProUnlocked && currentTotalBytes >= FREE_LIMIT_BYTES && (!editingId || hasNewFiles)) {
+        const limitMB = (FREE_LIMIT_BYTES / (1024 * 1024)).toFixed(0);
+        alert(`무료 제공 용량(${limitMB}MB)을 모두 사용하셨습니다.\n더 많은 기록과 사진을 저장하려면 PRO 버전(용량 무제한)으로 업그레이드해 주세요!`);
+        return;
+      }
+
       const saveBtn = document.getElementById('btn-bottom-save');
       const topSaveBtn = document.getElementById('btn-top-save');
       saveBtn.disabled = true;
@@ -1261,36 +1269,9 @@
           return { url: highResDataUrl, thumb: thumbDataUrl };
         }));
 
-        // 1. 방금 작성/수정한 글의 예상 용량 계산
-        let newEntryBytes = title.length * 2 + content.length * 2;
-        processedPhotos.forEach(p => {
-          if (p && p.url) newEntryBytes += p.url.length;
-          if (p && p.thumb) newEntryBytes += p.thumb.length;
-        });
-
-        // 2. 수정 중인 글이라면 기존 글이 차지하던 용량은 빼고 계산
-        let existingEntryBytes = 0;
-        const existingEntry = editingId ? entries.find(e => e.id === editingId) : null;
-        if (existingEntry) {
-          existingEntryBytes += (existingEntry.title || '').length * 2 + (existingEntry.content || '').length * 2;
-          if (Array.isArray(existingEntry.photos)) {
-            existingEntry.photos.forEach(p => {
-              if (p && p.url) existingEntryBytes += p.url.length;
-              if (p && p.thumb) existingEntryBytes += p.thumb.length;
-            });
-          }
-        }
-
-        // 3. 최종 예상 총용량이 무료 한도(50MB)를 초과하면 저장 차단
-        const projectedTotalBytes = currentTotalBytes - existingEntryBytes + newEntryBytes;
-        if (!isProUnlocked && projectedTotalBytes > FREE_LIMIT_BYTES) {
-          const projectedMB = (projectedTotalBytes / (1024 * 1024)).toFixed(1);
-          const limitMB = (FREE_LIMIT_BYTES / (1024 * 1024)).toFixed(0);
-          alert(`무료 제공 용량(${limitMB}MB)을 초과하여 저장할 수 없습니다.\n(예상 사용량: ${projectedMB}MB / 한도: ${limitMB}MB)\n\n사진 수를 줄이거나 PRO 버전(용량 무제한)으로 업그레이드해 주세요!`);
-          return;
-        }
-
         const now = Date.now();
+        const existingEntry = editingId ? entries.find(e => e.id === editingId) : null;
+
         const entryData = {
           id: editingId || `diary_${now}_${Math.random().toString(36).substring(2, 7)}`,
           title: title || '무제',
