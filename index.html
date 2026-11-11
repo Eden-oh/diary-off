@@ -585,7 +585,7 @@
     <div class="top-status-bar">
       <div class="storage-badge" id="storage-usage-badge">사용량 계산 중...</div>
       <div class="backup-actions">
-        <input type="file" id="restore-input" accept="application/json" style="display:none;" onchange="window.importBackupData(event)">
+        <input type="file" id="restore-input" accept="text/plain" style="display:none;" onchange="window.importBackupData(event)">
         <button class="btn-mini" onclick="window.exportBackupData()">백업 저장</button>
         <button class="btn-mini" onclick="window.openRestorePicker()">복원</button>
       </div>
@@ -1303,12 +1303,12 @@
       }
       try {
         const jsonStr = JSON.stringify(entries);
-        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const blob = new Blob([jsonStr], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         const dateStr = new Date().toISOString().slice(0, 10);
         a.href = url;
-        a.download = `diary_backup_${dateStr}.json`;
+        a.download = `diary_backup_${dateStr}.txt`;
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 1500);
       } catch (err) {
