@@ -585,7 +585,7 @@
     <div class="top-status-bar">
       <div class="storage-badge" id="storage-usage-badge">사용량 계산 중...</div>
       <div class="backup-actions">
-        <input type="file" id="restore-input" accept="application/json,.json" style="display:none;" onchange="window.importBackupData(event)">
+        <input type="file" id="restore-input" accept=".json" style="display:none;" onchange="window.importBackupData(event)">
         <button class="btn-mini" onclick="window.exportBackupData()">백업 저장</button>
         <button class="btn-mini" onclick="window.openRestorePicker()">복원</button>
       </div>
@@ -1317,7 +1317,7 @@
     };
 
     window.openRestorePicker = async function() {
-      if (window.showOpenFilePicker) {
+      if (false) {
         try {
           const [fileHandle] = await window.showOpenFilePicker({
             types: [{
