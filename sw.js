@@ -1,5 +1,5 @@
 // 캐시 버전 업데이트 (v3 -> v4)
-const CACHE_NAME = 'diary-off-v1';
+const CACHE_NAME = 'diary-off-v2';
 const urlsToCache = [
   '/',
   '/index.html',
