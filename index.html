@@ -674,7 +674,8 @@
     const STORE_NAME = 'diaries';
 
     // 무료 버전 용량 제한 설정 (50MB, 추후 유료 결제 완료 플래그로 해제 가능)
-    const FREE_LIMIT_BYTES = 50 * 1024 * 1024; 
+    const FREE_LIMIT_BYTES = 50 * 1024 * 1024;
+    localStorage.setItem('diary_pro_unlocked', 'true'); 
     let isProUnlocked = localStorage.getItem('diary_pro_unlocked') === 'true';
     let currentTotalBytes = 0;
 
@@ -747,8 +748,8 @@
       const badge = document.getElementById('storage-usage-badge');
       if (badge) {
         badge.innerText = isProUnlocked 
-          ? `PRO 무제한 (${usedMB} MB 사용 중)` 
-          : `무료 용량: ${usedMB} / ${limitMB} MB`;
+        ? `👑 PRO 무제한 (${usedMB} MB 사용 중)` 
+        : `무료 용량: ${usedMB} / ${limitMB} MB`;
       }
     }
 
