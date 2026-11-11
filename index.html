@@ -585,7 +585,7 @@
     <div class="top-status-bar">
       <div class="storage-badge" id="storage-usage-badge">사용량 계산 중...</div>
       <div class="backup-actions">
-        <input type="file" id="restore-input" accept="text/plain" style="display:none;" onchange="window.importBackupData(event)">
+        <input type="file" id="restore-input" accept=".json,.txt,application/json,text/plain" style="display:none;" onchange="window.importBackupData(event)">
         <button class="btn-mini" onclick="window.exportBackupData()">백업 저장</button>
         <button class="btn-mini" onclick="document.getElementById('restore-input').click()">복원</button>
       </div>
@@ -1314,26 +1314,6 @@
       } catch (err) {
         alert("백업 파일 생성 중 오류가 발생했습니다: " + err.message);
       }
-    };
-
-    window.openRestorePicker = async function() {
-      if (false) {
-        try {
-          const [fileHandle] = await window.showOpenFilePicker({
-            types: [{
-              description: '일기장 백업 파일',
-              accept: { 'application/json': ['.json'] }
-            }],
-            multiple: false
-          });
-          const file = await fileHandle.getFile();
-          window.importBackupData({ target: { files: [file], value: '' } });
-          return;
-        } catch (err) {
-          if (err.name === 'AbortError') return;
-        }
-      }
-      document.getElementById('restore-input').click();
     };
 
     window.importBackupData = function(event) {
