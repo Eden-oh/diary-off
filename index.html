@@ -584,23 +584,23 @@
 <body>
 
   <!-- ==================== 1. 메인 목록 화면 ==================== -->
-  <div id="main-page">
-    <div class="top-status-bar">
-      <div class="storage-badge" id="storage-usage-badge">사용량 계산 중...</div>
-      <select id="lang-select" onchange="window.changeLanguage(this.value)" style="font-size: 12px; padding: 5px 8px; border-radius: 8px; border: 1px solid #e5e7eb; background: #ffffff; color: #374151; font-weight: 500; outline: none; cursor: pointer;">
-       <option value="ko">🇰🇷 한국어</option>
-       <option value="en">🇺🇸 English</option>
-       <option value="ja">🇯🇵 日本語</option>
-       <option value="zh">🇹🇼 中文</option>
-       <option value="hi">🇮🇳 हिन्दी</option>
-      </select>
-    </div>  
-    <div class="backup-actions">
+    <div class="top-status-bar" style="flex-wrap: nowrap; gap: 4px;">
+      <div style="display: flex; align-items: center; gap: 4px; flex-shrink: 0;">
+        <div class="storage-badge" id="storage-usage-badge" style="padding: 4px 8px; font-size: 11px; white-space: nowrap;">사용량 계산 중...</div>
+        <select id="lang-select" onchange="window.changeLanguage(this.value)" style="font-size: 11px; padding: 3px 4px; border-radius: 10px; border: 1px solid #d1d5db; background: #ffffff; color: #374151; font-weight: 600; outline: none; cursor: pointer;">
+          <option value="ko">🇰🇷 한국어</option>
+          <option value="en">🇺🇸 EN</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="zh">🇹🇼 中文</option>
+          <option value="hi">🇮🇳 हिन्दी</option>
+        </select>
+      </div>
+      <div class="backup-actions" style="display: flex; gap: 4px; flex-shrink: 0;">
         <input type="file" id="restore-input" accept=".json,.txt,application/json,text/plain" style="display:none;" onchange="window.importBackupData(event)">
-        <button id="btn-backup" class="btn-mini" onclick="window.exportBackupData()">백업 저장</button>
-        <button id="btn-restore" class="btn-mini" onclick="document.getElementById('restore-input').click()">복원</button>
+        <button id="btn-backup" class="btn-mini" style="padding: 4px 8px; white-space: nowrap;" onclick="window.exportBackupData()">백업 저장</button>
+        <button id="btn-restore" class="btn-mini" style="padding: 4px 8px; white-space: nowrap;" onclick="document.getElementById('restore-input').click()">복원</button>
+      </div>
     </div>
-  </div>
 
     
 
