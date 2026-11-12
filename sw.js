@@ -1,5 +1,5 @@
-const CACHE_NAME = 'diary-off-auto';
-const ASSETS = ['/diary-off/', '/diary-off/index.html', '/diary-off/manifest.json', '/diary-off/icon-192.png', '/diary-off/icon-512.png'];
+const CACHE_NAME = 'diary-off-auto-v2';
+const ASSETS = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
