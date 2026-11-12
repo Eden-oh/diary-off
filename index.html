@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/diary-off/manifest.json">
   <title>기록 일기장</title>
 
   <style>
@@ -1906,7 +1906,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('/diary-off/sw.js')
           .then(reg => console.log('PWA Service Worker registered'))
           .catch(err => console.warn('PWA Service Worker registration failed:', err));
       });
