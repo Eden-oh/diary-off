@@ -587,20 +587,22 @@
   <div id="main-page">
     <div class="top-status-bar">
       <div class="storage-badge" id="storage-usage-badge">사용량 계산 중...</div>
-      <div class="backup-actions">
+      <select id="lang-select" onchange="window.changeLanguage(this.value)" style="font-size: 12px; padding: 5px 8px; border-radius: 8px; border: 1px solid #e5e7eb; background: #ffffff; color: #374151; font-weight: 500; outline: none; cursor: pointer;">
+       <option value="ko">🇰🇷 한국어</option>
+       <option value="en">🇺🇸 English</option>
+       <option value="ja">🇯🇵 日本語</option>
+       <option value="zh">🇹🇼 中文</option>
+       <option value="hi">🇮🇳 हिन्दी</option>
+      </select>
+    </div>  
+    <div class="backup-actions">
         <input type="file" id="restore-input" accept=".json,.txt,application/json,text/plain" style="display:none;" onchange="window.importBackupData(event)">
         <button id="btn-backup" class="btn-mini" onclick="window.exportBackupData()">백업 저장</button>
         <button id="btn-restore" class="btn-mini" onclick="document.getElementById('restore-input').click()">복원</button>
-      </div>
     </div>
+  </div>
 
-    <select id="lang-select" onchange="window.changeLanguage(this.value)" style="font-size: 12px; padding: 5px 8px; border-radius: 8px; border: 1px solid #e5e7eb; background: #ffffff; color: #374151; font-weight: 500; outline: none; cursor: pointer;">
-     <option value="ko">🇰🇷 한국어</option>
-     <option value="en">🇺🇸 English</option>
-     <option value="ja">🇯🇵 日本語</option>
-     <option value="zh">🇹🇼 中文</option>
-     <option value="hi">🇮🇳 हिन्दी</option>
-    </select>
+    
 
     <div class="header">
       <div class="search-box">
@@ -769,6 +771,7 @@
         backupBtn: "백업 저장",
         restoreBtn: "복원",
         emptyList: "기록이 없습니다. 우측 상단 '+ 새 기록'을 눌러 작성해 보세요.",
+        addPhotoHint: "화면을 눌러 사진을 추가하세요",
         titlePlaceholder: "제목을 입력하세요",
         contentPlaceholder: "내용을 입력하세요",
         saveBtn: "기기에 저장하기",
@@ -806,6 +809,7 @@
         backupBtn: "Backup",
         restoreBtn: "Restore",
         emptyList: "No entries yet. Click '+ New Entry' to start!",
+        addPhotoHint: "Tap to add photos",
         titlePlaceholder: "Enter a title",
         contentPlaceholder: "Write down your memories...",
         saveBtn: "Save to Device",
@@ -843,6 +847,7 @@
         backupBtn: "バックアップ",
         restoreBtn: "復元",
         emptyList: "記録がありません。右上の「+ 新規作成」から作成してください。",
+        addPhotoHint: "画面をタップして写真を追加",
         titlePlaceholder: "タイトルを入力",
         contentPlaceholder: "内容を入力してください...",
         saveBtn: "端末に保存する",
@@ -880,6 +885,7 @@
         backupBtn: "備份",
         restoreBtn: "還原",
         emptyList: "沒有記錄。點擊右上角的「+ 新增日記」來開始吧！",
+        addPhotoHint: "點擊畫面新增照片",
         titlePlaceholder: "請輸入標題",
         contentPlaceholder: "記錄今天的回憶...",
         saveBtn: "儲存至裝置",
@@ -917,6 +923,7 @@
         backupBtn: "बैकअप",
         restoreBtn: "पुनर्स्थापित करें",
         emptyList: "कोई प्रविष्टि नहीं। शुरू करने के लिए '+ नया लेख' पर क्लिक करें!",
+        addPhotoHint: "फ़ोटो जोड़ने के लिए टैप करें",
         titlePlaceholder: "शीर्षक दर्ज करें",
         contentPlaceholder: "आज की यादें लिखें...",
         saveBtn: "डिवाइस में सहेजें",
@@ -1121,9 +1128,11 @@
       track.innerHTML = '';
 
       if (currentPhotos.length === 0) {
-        track.innerHTML = `<div class="editor-empty-placeholder" style="cursor: pointer; display: flex; flex-direction: column; gap: 8px;" onclick="document.getElementById('file-input').click()">
-          <span style="font-size: 24px;">📷</span>
-        </div>`;
+      const t = I18N[currentLang] || I18N.en;
+      track.innerHTML = `<div class="editor-empty-placeholder" style="cursor: pointer; display: flex; flex-direction: column; gap: 8px;" onclick="document.getElementById('file-input').click()">
+        <span style="font-size: 24px;">📷</span>
+        <span>${t.addPhotoHint}</span>
+      </div>`;
         indicator.style.display = 'none';
         prevBtn.style.display = 'none';
         nextBtn.style.display = 'none';
