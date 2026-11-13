@@ -3,6 +3,9 @@
       "target": {
         "namespace": "android_app",
         "package_name": "io.github.eden_oh.twa",
-        "sha256_cert_fingerprints": ["B5:E9:40:26:49:74:33:FD:E0:B1:D5:9B:56:E3:FB:35:61:CD:A4:89:C2:3B:01:36:A5:4F:48:5B:42:39:EE:F6"]
+        "sha256_cert_fingerprints": [
+        "B5:E9:40:26:49:74:33:FD:E0:B1:D5:9B:56:E3:FB:35:61:CD:A4:89:C2:3B:01:36:A5:4F:48:5B:42:39:EE:F6",
+        "22:35:60:D0:50:38:7D:BA:D2:7B:C8:50:23:0E:FD:96:A6:43:5C:E7:B5:F0:AA:84:D0:6C:DA:24:2E:7D:3B:7E"
+        ]
       }
     }]
