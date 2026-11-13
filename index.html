@@ -1902,6 +1902,11 @@
     // -------------------------------------------------------------
     window.addEventListener('DOMContentLoaded', () => {
       fetchEntries();
+      if (navigator.storage && navigator.storage.persist) {
+        navigator.storage.persist().then(granted => {
+          console.log('영구 저장소 보호 활성화 여부:', granted);
+        });
+      }
     });
 
     if ('serviceWorker' in navigator) {
