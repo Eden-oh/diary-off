@@ -695,6 +695,17 @@
     let currentTotalBytes = 0;
 
     // [테스터 특전용 숨김 코드 - 정식 출시 때 이 블록만 삭제하면 됨]
+     const TESTER_MSG = {
+      ko: {
+        unlocked: '🎉 테스터 특전: PRO 무제한 모드가 활성화되었습니다!',
+        notice: '🎁 테스터 특전 안내\n\n상단의 용량 표시를 5번 연속 누르면 PRO 무제한 모드가 켜집니다.'
+      },
+      en: {
+        unlocked: '🎉 Tester perk: PRO Unlimited mode is now active!',
+        notice: '🎁 Tester Perk\n\nTap the storage indicator at the top 5 times in a row to unlock PRO Unlimited mode.'
+      }
+    };
+
     let secretTapCount = 0;
     let secretTapTimer = null;
     window.addEventListener('DOMContentLoaded', () => {
@@ -710,10 +721,18 @@
             isProUnlocked = true;
             localStorage.setItem('diary_pro_unlocked', 'true');
             calculateUsageAndUpdateUI();
-            alert('🎉 테스터 특전: PRO 무제한 모드가 활성화되었습니다!');
+            alert((TESTER_MSG[currentLang] || TESTER_MSG.en).unlocked);
           }
         });
       }
+    });    
+         // [테스터 공지 - 정식 출시 때 삭제]
+    window.addEventListener('DOMContentLoaded', () => {
+      if (isProUnlocked || localStorage.getItem('tester_notice_seen')) return;
+      localStorage.setItem('tester_notice_seen', 'true');
+      setTimeout(() => {
+        alert((TESTER_MSG[currentLang] || TESTER_MSG.en).notice);
+      }, 500);
     });
 
     function openLocalDB() {
